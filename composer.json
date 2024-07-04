@@ -1,0 +1,23 @@
+{
+    "name": "jotaroocha/itau-api-boleto-sdk",
+    "description": "SDK em PHP para integração com a API REST do Itaú, que facilita a emissão, instrução, consulta de boletos bancários e outras funcionalidades oferecidas pela API do Itaú.",
+    "version": "1.0.0",
+    "type": "library",
+    "require": {
+        "php": "^8.2",
+        "guzzlehttp/guzzle": "^7.8"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Jotaroocha\\ItauApiBoletoSdk\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Joao Rocha",
+            "email": "jotaroocha@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
