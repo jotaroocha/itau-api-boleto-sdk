@@ -78,4 +78,15 @@ class Helper
         return true;
     }
 
+    public static function getArrayModificadoByChavesCustomizadas(array $arrayOriginal, array $arrayDeChaves): array
+    {
+        // Modificar as chaves do array
+        $chavesCustomizadas = array_map(function ($key) use ($arrayDeChaves) {
+            return $keyMapping[$key] ?? $key; // Usar a chave original se não houver mapeamento
+        }, array_keys($arrayOriginal));
+
+        // Combinar as novas chaves com os valores e retornar
+        return array_combine($chavesCustomizadas, $arrayOriginal);
+    }
+
 }
