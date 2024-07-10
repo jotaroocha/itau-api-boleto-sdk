@@ -4,10 +4,11 @@ namespace Jotaroocha\ItauApiBolecodeSdk\Enums\Itau;
 
 use Jotaroocha\ItauApiBolecodeSdk\Traits\EnumHelperTrait;
 
-enum BoleCodeTipoCarteira: string
+enum BoleCodeEtapaProcessoEnum: string
 {
 
     use EnumHelperTrait;
 
-    case Carteira_109 = '109';
+    case Validacao = 'validacao';
+    case Efetivacao = 'efetivacao';
 }
