@@ -2,11 +2,9 @@
 
 namespace Jotaroocha\ItauApiBolecodeSdk\Api;
 
-use Exception;
 use GuzzleHttp\Client;
-use Jotaroocha\ItauApiBoletoSdk\Auxiliares\Configuracao;
-use Jotaroocha\ItauApiBoletoSdk\Excecoes\ExcecaoApi;
-use Jotaroocha\ItauApiBoletoSdk\Modelos\Boleto;
+use Jotaroocha\ItauApiBolecodeSdk\Auxiliares\Configuracao;
+use Jotaroocha\ItauApiBolecodeSdk\Modelos\Boleto;
 
 class ClienteItau extends ClienteBase
 {
@@ -16,10 +14,6 @@ class ClienteItau extends ClienteBase
         parent::__construct(Configuracao::get('itau.base_uri'));
     }
 
-
-    /**
-     * @throws ExcecaoApi
-     */
     public function gerarBoleto($dados): Boleto
     {
         // Implementação específica para gerar boleto no Itaú
@@ -31,10 +25,6 @@ class ClienteItau extends ClienteBase
         return new Boleto($response);
     }
 
-
-    /**
-     * @throws ExcecaoApi
-     */
     public function cancelarBoleto($id)
     {
         // Implementação específica para cancelar boleto no Itaú

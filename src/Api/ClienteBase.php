@@ -5,7 +5,7 @@ namespace Jotaroocha\ItauApiBolecodeSdk\Api;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use Jotaroocha\ItauApiBoletoSdk\Excecoes\ExcecaoApi;
+use Jotaroocha\ItauApiBolecodeSdk\Excecoes\ExcecaoApi;
 
 abstract class ClienteBase
 {
