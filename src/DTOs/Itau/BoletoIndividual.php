@@ -4,8 +4,8 @@ namespace Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau;
 
 use DateTime;
 use Exception;
-use Illuminate\Support\Facades\Validator;
-use InvalidArgumentException;
+use Respect\Validation\Exceptions\ValidationException;
+use Respect\Validation\Validator as v;
 use Jotaroocha\ItauApiBolecodeSdk\Auxiliares\Helper;
 use Jotaroocha\ItauApiBolecodeSdk\Excecoes\ExcecaoApi;
 use JsonSerializable;
@@ -15,27 +15,27 @@ class BoletoIndividual implements JsonSerializable
     private string $nossoNumero; // numero_nosso_numero
     private string $dataVencimento; // data_vencimento (AAAA-MM-DD)
     private string $valorTitulo; // valor_titulo
-    private string $dataLimitePagamento; // data_limite_pagamento (AAAA-MM-DD)
-    private string $seuNumero; // texto_seu_numero
-    private string $usoBeneficiario; // texto_uso_beneficiario
+    private ?string $dataLimitePagamento; // data_limite_pagamento (AAAA-MM-DD)
+    private ?string $seuNumero; // texto_seu_numero
+    private ?string $usoBeneficiario; // texto_uso_beneficiario
 
 
     /**
      * @throws ExcecaoApi
      */
     public function __construct(
-        string   $nossoNumero,
-        DateTime $dataVencimento,
-        float    $valorTitulo,
-        DateTime $dataLimitePagamento = null,
-        string   $seuNumero = null,
-        string   $usoBeneficiario = null
+        string    $nossoNumero,
+        DateTime  $dataVencimento,
+        float     $valorTitulo,
+        ?DateTime $dataLimitePagamento = null,
+        ?string   $seuNumero = null,
+        ?string   $usoBeneficiario = null
     )
     {
         $this->nossoNumero = $nossoNumero;
         $this->dataVencimento = $dataVencimento->format('Y-m-d');
         $this->valorTitulo = number_format($valorTitulo, 2, '.', '');
-        $this->dataLimitePagamento = $dataLimitePagamento->format('Y-m-d');
+        $this->dataLimitePagamento = $dataLimitePagamento?->format('Y-m-d');
         $this->seuNumero = $seuNumero;
         $this->usoBeneficiario = $usoBeneficiario;
 
@@ -68,62 +68,80 @@ class BoletoIndividual implements JsonSerializable
     private function validar(): void
     {
         try {
-            $validator = Validator::make($this->jsonSerialize(),
-                rules: [
-                    'nossoNumero' => [
-                        'required', 'string', 'max:80'
-                    ],
-                    'dataVencimento' => [
-                        'required', 'date', 'date_format:Y-m-d'
-                    ],
-                    'valorTitulo' => [
-                        'required', 'string', 'regex:/^\d{1,15}(\.\d{1,2})?$/'
-                    ],
-                    'dataLimitePagamento' => [
-                        'sometimes', 'required', 'date', 'date_format:Y-m-d'
-                    ],
-                    'seuNumero' => [
-                        'sometimes', 'required', 'string', 'max:10'
-                    ],
-                    'usoBeneficiario' => [
-                        'sometimes', 'required', 'string', 'max:25'
-                    ]
-                ],
-                messages: [
-                    'nossoNumero.required' => "O campo `:attribute` deve ser informado.",
-                    'nossoNumero.string' => "O campo `:attribute` deve conter apenas caracteres alfanuméricos.",
-                    'nossoNumero.max' => "O campo `:attribute` não pode ser maior que 80 caracteres.",
 
-                    'dataVencimento.required' => "O campo `:attribute` deve ser informado.",
-                    'dataVencimento.date' => "O campo `:attribute` deve receber um valor no formato de data. (AAAA-MM-DD)",
-                    'dataVencimento.date_format' => "O campo `:attribute` deve receber um valor no formato de data. (AAAA-MM-DD)",
+            $validator = V::attribute('nossoNumero', V::stringType()->notEmpty()->length(1, 80))
+                ->attribute('dataVencimento', V::date()->notEmpty())
+                ->attribute('valorTitulo', V::stringType()->notEmpty()->regex('/^\d{1,15}(\.\d{1,2})?$/'))
+                ->attribute('dataLimitePagamento', V::optional(V::date()->notEmpty()))
+                ->attribute('seuNumero', V::optional(V::stringType()->length(1, 10)->notEmpty()))
+                ->attribute('usoBeneficiario', V::optional(V::stringType()->length(1, 25)->notEmpty()));
 
-                    'valorTitulo.required' => "O campo `:attribute` deve ser informado.",
-                    'valorTitulo.string' => "O campo `:attribute` deve conter apenas caracteres alfanuméricos.",
-                    'valorTitulo.regex' => "O campo `:attribute` deve conter até 15 dígitos inteiros e 2 casas decimais.",
-
-                    'dataLimitePagamento.required' => "O campo :attribute não pode estar em branco.",
-                    'dataLimitePagamento.date' => "O campo `:attribute` deve receber um valor no formato de data. (AAAA-MM-DD)",
-                    'dataLimitePagamento.date_format' => "O campo `:attribute` deve receber um valor no formato de data. (AAAA-MM-DD)",
-
-                    'seuNumero.required' => "O campo :attribute não pode estar em branco.",
-                    'seuNumero.string' => "O campo `:attribute` deve conter apenas caracteres alfanuméricos.",
-                    'seuNumero.max' => "O campo `:attribute` não pode ser maior que 10 caracteres.",
-
-                    'usoBeneficiario.required' => "O campo :attribute não pode estar em branco.",
-                    'usoBeneficiario.string' => "O campo `:attribute` deve conter apenas caracteres alfanuméricos.",
-                    'usoBeneficiario.max' => "O campo `:attribute` não pode ser maior que 25 caracteres."
-                ]);
-
-
-            if ($validator->fails()) {
-                throw new InvalidArgumentException('Falha na validacao de ' . '`' . __CLASS__
-                    . '`: ' . $validator->errors());
+            try {
+                $validator->assert($this);
+            } catch (ValidationException $e) {
+                throw new ExcecaoApi('`' . __CLASS__ . '` --> Falha na validação dos dados: '
+                    . $e->getMessage(), 0, $e);
             }
 
-        } catch (InvalidArgumentException $e) {
-            throw new ExcecaoApi($e->getMessage(), $e->getCode());
 
+//            $validator = Validator::make($this->jsonSerialize(),
+//                rules: [
+//                    'nossoNumero' => [
+//                        'required', 'string', 'max:80'
+//                    ],
+//                    'dataVencimento' => [
+//                        'required', 'date', 'date_format:Y-m-d'
+//                    ],
+//                    'valorTitulo' => [
+//                        'required', 'string', 'regex:/^\d{1,15}(\.\d{1,2})?$/'
+//                    ],
+//                    'dataLimitePagamento' => [
+//                        'sometimes', 'required', 'date', 'date_format:Y-m-d'
+//                    ],
+//                    'seuNumero' => [
+//                        'sometimes', 'required', 'string', 'max:10'
+//                    ],
+//                    'usoBeneficiario' => [
+//                        'sometimes', 'required', 'string', 'max:25'
+//                    ]
+//                ],
+//                messages: [
+//                    'nossoNumero.required' => "O campo `:attribute` deve ser informado.",
+//                    'nossoNumero.string' => "O campo `:attribute` deve conter apenas caracteres alfanuméricos.",
+//                    'nossoNumero.max' => "O campo `:attribute` não pode ser maior que 80 caracteres.",
+//
+//                    'dataVencimento.required' => "O campo `:attribute` deve ser informado.",
+//                    'dataVencimento.date' => "O campo `:attribute` deve receber um valor no formato de data. (AAAA-MM-DD)",
+//                    'dataVencimento.date_format' => "O campo `:attribute` deve receber um valor no formato de data. (AAAA-MM-DD)",
+//
+//                    'valorTitulo.required' => "O campo `:attribute` deve ser informado.",
+//                    'valorTitulo.string' => "O campo `:attribute` deve conter apenas caracteres alfanuméricos.",
+//                    'valorTitulo.regex' => "O campo `:attribute` deve conter até 15 dígitos inteiros e 2 casas decimais.",
+//
+//                    'dataLimitePagamento.required' => "O campo :attribute não pode estar em branco.",
+//                    'dataLimitePagamento.date' => "O campo `:attribute` deve receber um valor no formato de data. (AAAA-MM-DD)",
+//                    'dataLimitePagamento.date_format' => "O campo `:attribute` deve receber um valor no formato de data. (AAAA-MM-DD)",
+//
+//                    'seuNumero.required' => "O campo :attribute não pode estar em branco.",
+//                    'seuNumero.string' => "O campo `:attribute` deve conter apenas caracteres alfanuméricos.",
+//                    'seuNumero.max' => "O campo `:attribute` não pode ser maior que 10 caracteres.",
+//
+//                    'usoBeneficiario.required' => "O campo :attribute não pode estar em branco.",
+//                    'usoBeneficiario.string' => "O campo `:attribute` deve conter apenas caracteres alfanuméricos.",
+//                    'usoBeneficiario.max' => "O campo `:attribute` não pode ser maior que 25 caracteres."
+//                ]);
+//
+//
+//            if ($validator->fails()) {
+//                throw new InvalidArgumentException('Falha na validacao de ' . '`' . __CLASS__
+//                    . '`: ' . $validator->errors());
+//            }
+//
+//        } catch (InvalidArgumentException $e) {
+//            throw new ExcecaoApi($e->getMessage(), $e->getCode());
+
+        } catch (ExcecaoApi $e) {
+            throw new ExcecaoApi($e->getMessage(), $e->getCode(), $e);
         } catch (Exception $e) {
             throw new Exception($e);
         }
