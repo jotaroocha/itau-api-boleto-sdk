@@ -8,7 +8,7 @@ class Configuracao
     {
         /* Adicionar aqui novas URIs para cada novo Cliente de integração */
         $config = [
-            'itau.base_uri' => 'https://api.itau.br'
+            'itau.base_uri' => 'https://api.itau.br' 
         ];
 
         return $config[$key] ?? null;
