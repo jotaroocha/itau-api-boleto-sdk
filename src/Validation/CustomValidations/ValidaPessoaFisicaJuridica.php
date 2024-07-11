@@ -1,6 +1,6 @@
 <?php
 
-namespace Jotaroocha\ItauApiBolecodeSdk\Validation\Rules;
+namespace Jotaroocha\ItauApiBolecodeSdk\Validation\CustomValidations;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;

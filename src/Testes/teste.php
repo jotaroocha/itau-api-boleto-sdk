@@ -33,10 +33,9 @@ try {
         dataVencimento: new DateTime('25-07-2024'),
         valorTitulo: 100,
         dataLimitePagamento: new DateTime('25-07-2024'),
-        seuNumero: '',
-        usoBeneficiario: "teste"
+        seuNumero: ' ',
+        usoBeneficiario: "   "
     );
-    echo 'Deu boa!';
 } catch (ExcecaoApi $e) {
     echo $e->getMessage();
 } catch (\Exception $e) {
