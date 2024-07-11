@@ -75,11 +75,13 @@ class BoletoIndividual implements JsonSerializable
             $validator = new Factory(new Translator($translator, 'pt_BR'));
 
             $validator = $validator->make(
-                $this->jsonSerialize(), BoletoIndividualRule::rules(), BoletoIndividualRule::messages());
+                $this->jsonSerialize(),
+                BoletoIndividualRule::rules(),
+                BoletoIndividualRule::messages());
 
             if ($validator->fails()) {
-                throw new InvalidArgumentException('Falha na validacao de campos ' . '`' . __CLASS__
-                    . '`: ' . json_encode($validator->errors()->all()));
+                throw new InvalidArgumentException('Falha na validacao de campos ' . '`' .
+                    __CLASS__ . '`: ' . json_encode($validator->errors()->all()));
             }
 
         } catch (InvalidArgumentException $e) {

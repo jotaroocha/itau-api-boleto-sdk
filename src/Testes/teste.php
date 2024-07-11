@@ -36,6 +36,8 @@ try {
         seuNumero: ' ',
         usoBeneficiario: "   "
     );
+
+    echo json_encode($boletoIndividual->jsonSerialize());
 } catch (ExcecaoApi $e) {
     echo $e->getMessage();
 } catch (\Exception $e) {
