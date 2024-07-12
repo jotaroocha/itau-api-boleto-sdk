@@ -7,6 +7,7 @@ namespace Jotaroocha\ItauApiBolecodeSdk\Testes;
 use DateTime;
 use Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau\BoletoIndividual;
 use Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau\Endereco;
+use Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau\Pessoa;
 use Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau\Pix;
 use Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau\TipoPessoa;
 use Jotaroocha\ItauApiBolecodeSdk\Enums\Itau\EstadoSiglaEnum;
@@ -54,9 +55,15 @@ try {
 
     $tipoPessoa = new TipoPessoa(
         tipoPessoa: TipoPessoaEnum::Juridica,
-       cnpj: "76707686000117");
+        cnpj: "76707686000117");
 
-    echo json_encode($tipoPessoa->getArrayForApi());
+    $pessoa = new Pessoa(
+        nome: "Joao Rocha",
+        tipoPessoa: $tipoPessoa,
+        nomeFantasia: "Teste"
+    );
+
+    echo json_encode($pessoa->getArrayForApi());
 } catch (ExcecaoApi $e) {
     echo $e->getMessage();
 } catch (\Exception $e) {

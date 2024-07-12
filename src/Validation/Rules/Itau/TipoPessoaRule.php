@@ -41,8 +41,8 @@ class TipoPessoaRule implements ItauInterfaceRule
     public static function messages(): array
     {
         return [
-            'tipoPessoa.Illuminate\Validation\Rules\Enum' => "O valor informado no campo `:attribute` é inválido. " .
-                "São valores válidos: " . TipoPessoaEnum::toStringQuoted(),
+            'tipoPessoa.Illuminate\Validation\Rules\Enum' => "O valor informado no campo `:attribute` e invalido. " .
+                "Sao valores validos: " . TipoPessoaEnum::toStringQuoted(),
 
             'cpf.required_without' => "O campo `:attribute` deve ser informado quando o campo `cnpj` estiver vazio",
             'cpf.prohibits' => "O campo `:attribute` nao pode estar presente caso o campo `cnpj` tenha sido preenchido.",

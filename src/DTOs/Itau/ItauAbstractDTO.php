@@ -17,7 +17,6 @@ ItauAbstractDTO implements JsonSerializable
 
     protected array $regrasDeValidacao = [];
     protected array $mensagensDeValidacaoCustomizadas = [];
-    protected array $chavesCustomizadas = [];
 
     /**
      * @throws ExcecaoApi
@@ -44,6 +43,7 @@ ItauAbstractDTO implements JsonSerializable
 
         try {
             $this->validar();
+            $this->unsetUnnecessaryElements();
         } catch (ExcecaoApi $e) {
             throw new ExcecaoApi($e->getMessage(), $e->getCode());
         } catch (Exception $e) {
@@ -61,9 +61,12 @@ ItauAbstractDTO implements JsonSerializable
         $this->mensagensDeValidacaoCustomizadas = $mensagensDeValidacaoCustomizadas;
     }
 
-    public function setChavesCustomizadas(array $chavesCustomizadas): void
+    abstract public function getChavesCustomizadas(): array;
+
+    public function unsetUnnecessaryElements(): void
     {
-        $this->chavesCustomizadas = $chavesCustomizadas;
+        $this->setRegrasDeValidacao([]);
+        $this->setMensagensDeValidacaoCustomizadas([]);
     }
 
     /**
@@ -100,33 +103,48 @@ ItauAbstractDTO implements JsonSerializable
         }
     }
 
-    public function jsonSerialize(): array
+    public function jsonSerialize(bool $chavesCustomizadas = false): array
     {
-        return get_object_vars($this);
+        $array = [];
+        foreach ($this as $key => $value) {
+            if (!is_object($value)) {
+                $array[$key] = $value;
+            } else {
+                $array[$key] = $this->converterObjetoParaArray($value, $chavesCustomizadas);
+            }
+        }
+        return $array;
+    }
+
+    private function converterObjetoParaArray($objeto, bool $chavesCustomizadas = false): array
+    {
+        if (!$objeto instanceof JsonSerializable) {
+            return (array)$objeto;
+        }
+
+        if ($chavesCustomizadas) {
+            return Helper::getArrayModificadoByChavesCustomizadas($objeto->jsonSerialize(),
+                $objeto->getChavesCustomizadas());
+        }
+
+        return $objeto->jsonSerialize();
     }
 
     /**
-     * @throws ExcecaoApi
      * @throws Exception
      */
     public function getArrayForApi(): array
     {
         try {
-            if (empty($this->chavesCustomizadas)) {
-                throw ExcecaoApi::chavesCustomizadasEmpty();
-            }
 
-            /* Removendo chaves nao necessárias para esta função */
-            $arrayOriginal = $this->jsonSerialize();
+            $arrayModificado = Helper::getArrayModificadoByChavesCustomizadas(
+                $this->jsonSerialize(true), $this->getChavesCustomizadas());
 
-            unset($arrayOriginal['regrasDeValidacao']);
-            unset($arrayOriginal['mensagensDeValidacaoCustomizadas']);
-            unset($arrayOriginal['chavesCustomizadas']);
+            $arrayModificado = Helper::removerChaves($arrayModificado,
+                ['mensagensDeValidacaoCustomizadas', 'regrasDeValidacao']);
 
-            return Helper::getArrayModificadoByChavesCustomizadas($arrayOriginal, $this->chavesCustomizadas);
+            return Helper::removerValoresNulosVazios($arrayModificado);
 
-        } catch (ExcecaoApi $e) {
-            throw new ExcecaoApi($e->getMessage(), $e->getCode(), $e);
         } catch (Exception $e) {
             throw new Exception($e);
         }

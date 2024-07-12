@@ -90,4 +90,44 @@ class Helper
         return array_combine($chavesCustomizadas, $arrayOriginal);
     }
 
+    public static function removerChaves($array, $chaves)
+    {
+        if (empty($array) || empty($chaves)) {
+            return $array;
+        }
+
+        foreach ($chaves as $chaveAtual) {
+
+            if (is_array($array)) {
+
+                foreach ($array as $key => $value) {
+
+                    if ($key === $chaveAtual) {
+                        unset($array[$key]);
+                    } else {
+                        $array[$key] = self::removerChaves($value, $chaves);
+                    }
+                }
+            }
+        }
+        return $array;
+    }
+
+    public static function removerValoresNulosVazios($array)
+    {
+        if (empty($array)) {
+            return $array;
+        }
+
+        foreach ($array as $key => $value) {
+            if (is_null($value) || $value === "" || $value === []) {
+                unset($array[$key]);
+            } else if (is_array($value)) {
+                $array[$key] = self::removerValoresNulosVazios($value);
+            }
+        }
+
+        return $array;
+    }
+
 }
