@@ -17,6 +17,10 @@ class ValidaPessoaFisicaJuridica implements ValidationRule
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
+        if (empty($value)) {
+            return;
+        }
+
         if (!(strlen((string)$value) === 11 or strlen((string)$value) === 14)) {
             $fail('O :attribute deve conter exatamente 11 ou 14 digitos, a depender ' .
                 'do tipo do `codigo_tipo_pessoa` informado.');

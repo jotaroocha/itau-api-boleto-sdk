@@ -5,16 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b89e726-049b-4b64-9fed-fa0738c2ac67" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Testes/teste.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Enums/Itau/EstadoSiglaEnum.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Enums/Itau/ItauAbstractDTO.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Validation/Rules/Itau/EnderecoRule.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/codeception.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeception.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/itau-api-boleto-sdk.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/itau-api-boleto-sdk.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Auxiliares/Helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Auxiliares/Helper.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DTOs/Itau/BoletoIndividual.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Itau/BoletoIndividual.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTOs/Itau/Pix.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Itau/Pix.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Enums/BoletoEtapaProcessoEnum.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Enums/CodigoTipoPessoaEnum.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Testes/teste.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Testes/teste.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +26,9 @@
   </component>
   <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution />
+    <execution>
+      <executable path="composer" />
+    </execution>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -46,8 +51,35 @@
       <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
-      <path value="$PROJECT_DIR$/vendor/respect/stringifier" />
-      <path value="$PROJECT_DIR$/vendor/respect/validation" />
+      <path value="$PROJECT_DIR$/vendor/carbonphp/carbon-doctrine-types" />
+      <path value="$PROJECT_DIR$/vendor/voku/portable-ascii" />
+      <path value="$PROJECT_DIR$/vendor/psr/clock" />
+      <path value="$PROJECT_DIR$/vendor/illuminate/collections" />
+      <path value="$PROJECT_DIR$/vendor/illuminate/conditionable" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/vendor/illuminate/filesystem" />
+      <path value="$PROJECT_DIR$/vendor/illuminate/macroable" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/illuminate/container" />
+      <path value="$PROJECT_DIR$/vendor/illuminate/contracts" />
+      <path value="$PROJECT_DIR$/vendor/illuminate/validation" />
+      <path value="$PROJECT_DIR$/vendor/illuminate/support" />
+      <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/vendor/illuminate/translation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php83" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/symfony/clock" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/brick/math" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -103,6 +135,10 @@
       <workItem from="1720700374851" duration="1078000" />
       <workItem from="1720702295798" duration="5000000" />
       <workItem from="1720707680495" duration="4521000" />
+      <workItem from="1720724459215" duration="5242000" />
+      <workItem from="1720788651898" duration="4512000" />
+      <workItem from="1720793204037" duration="88000" />
+      <workItem from="1720793302720" duration="451000" />
     </task>
     <servers />
   </component>
@@ -119,23 +155,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/DTOs/Itau/BoletoIndividual.php</url>
-          <line>34</line>
-          <option name="timeStamp" value="12" />
+          <line>54</line>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/DTOs/Itau/BoletoIndividual.php</url>
-          <line>26</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/DTOs/Itau/BoletoIndividual.php</url>
-          <line>35</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/DTOs/Itau/BoletoIndividual.php</url>
-          <line>71</line>
-          <option name="timeStamp" value="15" />
+          <url>file://$PROJECT_DIR$/src/Testes/teste.php</url>
+          <line>30</line>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
