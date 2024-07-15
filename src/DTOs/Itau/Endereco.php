@@ -5,12 +5,15 @@ namespace Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau;
 use Jotaroocha\ItauApiBolecodeSdk\Enums\Itau\EstadoSiglaEnum;
 use Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau\EnderecoRule;
 
+
+/* 'endereco' */
+
 class Endereco extends ItauAbstractDTO
 {
     protected string $logradouro; // nome_logradouro
     protected string $bairro; // nome_bairro
     protected string $cidade; // nome_cidade
-    protected EstadoSiglaEnum $uf; // sigla_UF
+    protected string $uf; // sigla_UF
     protected string $cep; // numero_CEP
 
     public function __construct(string          $logradouro,
@@ -22,22 +25,22 @@ class Endereco extends ItauAbstractDTO
         $this->logradouro = trim($logradouro);
         $this->bairro = trim($bairro);
         $this->cidade = trim($cidade);
-        $this->uf = $uf;
+        $this->uf = $uf->value;
         $this->cep = trim($cep);
 
-        $this->setRegrasDeValidacao(EnderecoRule::rules());
-        $this->setMensagensDeValidacaoCustomizadas(EnderecoRule::messages());
-
-        $this->setChavesCustomizadas(
-            [
-                'logradouro' => 'nome_logradouro',
-                'bairro' => 'nome_bairro',
-                'cidade' => 'nome_cidade',
-                'uf' => 'sigla_UF',
-                'cep' => 'numero_CEP'
-            ]
-        );
-
+        $this->setRule(new EnderecoRule());
+        
         parent::__construct();
+    }
+
+    public function getChavesCustomizadas(): array
+    {
+        return [
+            'logradouro' => 'nome_logradouro',
+            'bairro' => 'nome_bairro',
+            'cidade' => 'nome_cidade',
+            'uf' => 'sigla_UF',
+            'cep' => 'numero_CEP'
+        ];
     }
 }

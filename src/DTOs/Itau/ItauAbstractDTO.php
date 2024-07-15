@@ -9,6 +9,7 @@ use Illuminate\Validation\Factory;
 use InvalidArgumentException;
 use Jotaroocha\ItauApiBolecodeSdk\Auxiliares\Helper;
 use Jotaroocha\ItauApiBolecodeSdk\Excecoes\ExcecaoApi;
+use Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau\ItauInterfaceRule;
 use JsonSerializable;
 
 abstract class
@@ -35,6 +36,7 @@ ItauAbstractDTO implements JsonSerializable
          *    2.1 ⇾ 'regrasDeValidacao' e 'mensagensDeValidacaoCustomizadas' devem ser uma classe de
          *              'Validation\Itau\Rules' que implementa 'ItauAbstractRules';
          *
+         *
          *    2.2 ⇾ 'chavesCustomizadas' → Deve ser um Array mapeando [['atributoDaClasse' =>
          *              'atributoNaDocumentaçãoDaApi'], []];
          *
@@ -51,14 +53,20 @@ ItauAbstractDTO implements JsonSerializable
         }
     }
 
-    public function setRegrasDeValidacao(array $regrasDeValidacao): void
+    private function setRegrasDeValidacao(array $regrasDeValidacao): void
     {
         $this->regrasDeValidacao = $regrasDeValidacao;
     }
 
-    public function setMensagensDeValidacaoCustomizadas(array $mensagensDeValidacaoCustomizadas): void
+    private function setMensagensDeValidacaoCustomizadas(array $mensagensDeValidacaoCustomizadas): void
     {
         $this->mensagensDeValidacaoCustomizadas = $mensagensDeValidacaoCustomizadas;
+    }
+
+    public function setRule(ItauInterfaceRule $rule): void
+    {
+        $this->setRegrasDeValidacao($rule->rules());
+        $this->setMensagensDeValidacaoCustomizadas($rule->messages());
     }
 
     abstract public function getChavesCustomizadas(): array;
@@ -108,26 +116,47 @@ ItauAbstractDTO implements JsonSerializable
         $array = [];
         foreach ($this as $key => $value) {
             if (!is_object($value)) {
-                $array[$key] = $value;
+                if (is_array($value)) {
+
+                    $array2 = [];
+                    foreach ($value as $val) {
+                        if (is_object($val)) {
+                            if ($val instanceof JsonSerializable) {
+                                $array2[] = $val->jsonSerialize($chavesCustomizadas);
+                            } else {
+                                $array2[] = $this->converterObjetoParaArray($val, $chavesCustomizadas);
+                            }
+                        } else {
+                            $array2[] = $val;
+                        }
+                    }
+                    $array[$key] = $array2;
+                } else {
+                    $array[$key] = $value;
+                }
+
             } else {
                 $array[$key] = $this->converterObjetoParaArray($value, $chavesCustomizadas);
             }
         }
+
+        if ($chavesCustomizadas and !empty($array)) {
+            return Helper::getArrayModificadoByChavesCustomizadas(
+                arrayOriginal: $array,
+                arrayDeChavesCustomizadas: $this->getChavesCustomizadas()
+            );
+        }
+
         return $array;
     }
 
-    private function converterObjetoParaArray($objeto, bool $chavesCustomizadas = false): array
+    private function converterObjetoParaArray(mixed $objeto, bool $chavesCustomizadas = false): array
     {
         if (!$objeto instanceof JsonSerializable) {
             return (array)$objeto;
         }
 
-        if ($chavesCustomizadas) {
-            return Helper::getArrayModificadoByChavesCustomizadas($objeto->jsonSerialize(),
-                $objeto->getChavesCustomizadas());
-        }
-
-        return $objeto->jsonSerialize();
+        return $objeto->jsonSerialize($chavesCustomizadas);
     }
 
     /**
@@ -136,11 +165,7 @@ ItauAbstractDTO implements JsonSerializable
     public function getArrayForApi(): array
     {
         try {
-
-            $arrayModificado = Helper::getArrayModificadoByChavesCustomizadas(
-                $this->jsonSerialize(true), $this->getChavesCustomizadas());
-
-            $arrayModificado = Helper::removerChaves($arrayModificado,
+            $arrayModificado = Helper::removerChaves($this->jsonSerialize(true),
                 ['mensagensDeValidacaoCustomizadas', 'regrasDeValidacao']);
 
             return Helper::removerValoresNulosVazios($arrayModificado);

@@ -5,19 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b89e726-049b-4b64-9fed-fa0738c2ac67" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Enums/Itau/EstadoSiglaEnum.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Enums/Itau/ItauAbstractDTO.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Validation/Rules/Itau/EnderecoRule.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeception.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeception.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/itau-api-boleto-sdk.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/itau-api-boleto-sdk.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Enums/Itau/BoleCodeInstrumentoCobrancaEnum.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Validation/Rules/Itau/AvalistaRule.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Validation/Rules/Itau/BoletoRule.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Validation/Rules/Itau/PagadorRule.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Auxiliares/Helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Auxiliares/Helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DTOs/Itau/Avalista.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Itau/Avalista.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DTOs/Itau/Boleto.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Itau/Boleto.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DTOs/Itau/BoletoIndividual.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Itau/BoletoIndividual.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enums/BoletoEtapaProcessoEnum.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enums/CodigoTipoPessoaEnum.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DTOs/Itau/Endereco.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Itau/Endereco.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DTOs/Itau/ItauAbstractDTO.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Itau/ItauAbstractDTO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DTOs/Itau/Pagador.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Itau/Pagador.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DTOs/Itau/Pessoa.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Itau/Pessoa.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DTOs/Itau/TipoPessoa.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Itau/TipoPessoa.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Testes/teste.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Testes/teste.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Validation/Rules/Itau/BoletoIndividualRule.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Validation/Rules/Itau/BoletoIndividualRule.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +141,8 @@
       <workItem from="1720724459215" duration="5242000" />
       <workItem from="1720788651898" duration="4512000" />
       <workItem from="1720793204037" duration="88000" />
-      <workItem from="1720793302720" duration="451000" />
+      <workItem from="1720793302720" duration="19387000" />
+      <workItem from="1721045040348" duration="17473000" />
     </task>
     <servers />
   </component>
@@ -146,24 +150,10 @@
     <option name="version" value="3" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/Testes/teste.php</url>
-          <line>20</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/DTOs/Itau/BoletoIndividual.php</url>
-          <line>54</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/Testes/teste.php</url>
-          <line>30</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="teste.php">
+        <watch expression="$array" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

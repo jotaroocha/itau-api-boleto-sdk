@@ -8,7 +8,7 @@ use Jotaroocha\ItauApiBolecodeSdk\Enums\Itau\EstadoSiglaEnum;
 
 class EnderecoRule implements ItauInterfaceRule
 {
-    public static function rules(): array
+    public function rules(): array
     {
         return [
             'logradouro' => [
@@ -32,7 +32,7 @@ class EnderecoRule implements ItauInterfaceRule
     /**
      * @throws Exception
      */
-    public static function messages(): array
+    public function messages(): array
     {
         return [
             'logradouro.max' => "O campo `:attribute` nao pode ser maior que 45 caracteres.",

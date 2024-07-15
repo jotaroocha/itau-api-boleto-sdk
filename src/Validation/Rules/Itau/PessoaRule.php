@@ -5,7 +5,7 @@ namespace Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau;
 class PessoaRule implements ItauInterfaceRule
 {
 
-    public static function rules(): array
+    public function rules(): array
     {
         return [
             'nome' => [
@@ -17,7 +17,7 @@ class PessoaRule implements ItauInterfaceRule
         ];
     }
 
-    public static function messages(): array
+    public function messages(): array
     {
         return [
             'nome.max' => "O campo `:attribute` nao pode ser maior que 50 caracteres.",

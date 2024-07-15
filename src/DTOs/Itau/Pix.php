@@ -6,37 +6,31 @@ namespace Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau;
 use Exception;
 use Jotaroocha\ItauApiBolecodeSdk\Enums\Itau\PixTipoCobrancaEnum;
 use Jotaroocha\ItauApiBolecodeSdk\Excecoes\ExcecaoApi;
-use Respect\Validation\Exceptions\ValidationException;
-use Respect\Validation\Validator as v;
+use Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau\PixRule;
 
-class Pix implements \JsonSerializable
+class Pix extends ItauAbstractDTO
 {
-    public string $chave; // chave
-    public mixed $idLocation; // id_location
-    private PixTipoCobrancaEnum $tipoCobranca; // tipo_cobranca
+    protected string $chave; // chave
+    protected ?string $idLocation; // id_location
+    protected string $tipoCobranca; // tipo_cobranca
 
-
-    /**
-     * @throws \Exception
-     */
-    public function validate()
+    public function __construct(string $chave, PixTipoCobrancaEnum $tipoCobranca, string $idLocation = null)
     {
+        $this->chave = trim($chave);
+        $this->tipoCobranca = $tipoCobranca->value;
+        $this->idLocation = $idLocation ? trim($idLocation) : null;
 
-        $validator = v::key('chave', v::stringType()->notEmpty()->length(1, 80))
-            ->key('idLocation', v::intType()->notEmpty());
+        $this->setRule(new PixRule());
 
-        try {
-            $validator->assert($this->jsonSerialize());
-        } catch (ValidationException $e) {
-            throw new ExcecaoApi('`' . __CLASS__ . "` -> Erro na validação dos dados: " .
-                $e->getMessage(), $e->getCode());
-        }
-
-
+        parent::__construct();
     }
 
-    public function jsonSerialize(): mixed
+    public function getChavesCustomizadas(): array
     {
-        return get_object_vars($this);
+        return [
+            'chave' => 'chave',
+            'idLocation' => 'id_location',
+            'tipoCobranca' => 'tipo_cobranca'
+        ];
     }
 }

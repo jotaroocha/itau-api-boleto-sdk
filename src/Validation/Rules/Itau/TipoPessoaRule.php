@@ -11,12 +11,14 @@ class TipoPessoaRule implements ItauInterfaceRule
 {
 
 
-    public static function rules(): array
+    protected string $codigoTipoPessoa;
+
+    public function __construct(string $codigoTipoPessoa)
     {
-        return [];
+        $this->codigoTipoPessoa = $codigoTipoPessoa;
     }
 
-    public static function rulesByParameters(array $params): array
+    public function rules(): array
     {
         return [
             'tipoPessoa' => [
@@ -25,12 +27,12 @@ class TipoPessoaRule implements ItauInterfaceRule
             'cpf' => [
                 'required_without:cnpj',
                 'prohibits:cnpj',
-                new ValidaPessoaFisicaJuridica($params['codigo_tipo_pessoa'])
+                new ValidaPessoaFisicaJuridica($this->codigoTipoPessoa)
             ],
             'cnpj' => [
                 'required_without:cpf',
                 'prohibits:cpf',
-                new ValidaPessoaFisicaJuridica($params['codigo_tipo_pessoa'])
+                new ValidaPessoaFisicaJuridica($this->codigoTipoPessoa)
             ]
         ];
     }
@@ -38,7 +40,7 @@ class TipoPessoaRule implements ItauInterfaceRule
     /**
      * @throws Exception
      */
-    public static function messages(): array
+    public function messages(): array
     {
         return [
             'tipoPessoa.Illuminate\Validation\Rules\Enum' => "O valor informado no campo `:attribute` e invalido. " .

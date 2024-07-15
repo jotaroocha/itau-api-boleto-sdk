@@ -4,6 +4,8 @@ namespace Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau;
 
 use Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau\PessoaRule;
 
+/* 'pessoa' */
+
 class Pessoa extends ItauAbstractDTO
 {
     protected string $nome; // nome_pessoa
@@ -16,8 +18,7 @@ class Pessoa extends ItauAbstractDTO
         $this->tipoPessoa = $tipoPessoa;
         $this->nomeFantasia = $nomeFantasia ? trim($nomeFantasia) : null;
 
-        $this->setRegrasDeValidacao(PessoaRule::rules());
-        $this->setMensagensDeValidacaoCustomizadas(PessoaRule::messages());
+        $this->setRule(new PessoaRule());
 
         parent::__construct();
     }

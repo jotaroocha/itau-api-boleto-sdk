@@ -4,7 +4,7 @@ namespace Jotaroocha\ItauApiBolecodeSdk\Enums\Itau;
 
 use Jotaroocha\ItauApiBolecodeSdk\Traits\EnumHelperTrait;
 
-enum BoleCodeEspecieTituloEnum: string
+enum BoletoEspecieTituloEnum: string
 {
 
     use EnumHelperTrait;

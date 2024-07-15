@@ -5,14 +5,14 @@ namespace Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau;
 class BoletoIndividualRule implements ItauInterfaceRule
 {
 
-    public static function rules(): array
+    public function rules(): array
     {
         return [
             'nossoNumero' => [
                 'max:80'
             ],
             'dataVencimento' => [
-                'date', 'date_format:Y-m-d'
+                'date'
             ],
             'valorTitulo' => [
                 'regex:/^\d{1,15}(\.\d{1,2})?$/'
@@ -29,7 +29,7 @@ class BoletoIndividualRule implements ItauInterfaceRule
         ];
     }
 
-    public static function messages(): array
+    public function messages(): array
     {
         return [
             'nossoNumero.max' => "O campo `:attribute` nao pode ser maior que 80 caracteres.",
@@ -40,7 +40,6 @@ class BoletoIndividualRule implements ItauInterfaceRule
             'valorTitulo.regex' => "O campo `:attribute` deve conter ate 15 dígitos inteiros e 2 casas decimais.",
 
             'dataLimitePagamento.date' => "O campo `:attribute` deve receber um valor no formato de data. (AAAA-MM-DD)",
-            'dataLimitePagamento.date_format' => "O campo `:attribute` deve receber um valor no formato de data. (AAAA-MM-DD)",
 
             'seuNumero.max' => "O campo `:attribute` nao pode ser maior que 10 caracteres.",
 

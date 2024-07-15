@@ -6,6 +6,9 @@ use DateTime;
 use Jotaroocha\ItauApiBolecodeSdk\Excecoes\ExcecaoApi;
 use Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau\BoletoIndividualRule;
 
+
+/* 'dados_individuais_boleto' */
+
 class BoletoIndividual extends ItauAbstractDTO
 {
     protected string $nossoNumero; // numero_nosso_numero
@@ -35,65 +38,21 @@ class BoletoIndividual extends ItauAbstractDTO
         $this->seuNumero = $seuNumero ? trim($seuNumero) : null;
         $this->usoBeneficiario = $usoBeneficiario ? trim($usoBeneficiario) : null;
 
-        $this->setRegrasDeValidacao(BoletoIndividualRule::rules());
-        $this->setMensagensDeValidacaoCustomizadas(BoletoIndividualRule::messages());
-        $this->setChavesCustomizadas(
-            [
-                'nossoNumero' => 'numero_nosso_numero',
-                'dataVencimento' => 'data_vencimento',
-                'valorTitulo' => 'valor_titulo',
-                'dataLimitePagamento' => 'data_limite_pagamento',
-                'seuNumero' => 'texto_seu_numero',
-                'usoBeneficiario' => 'texto_uso_beneficiario'
-            ]
-        );
+        $this->setRule(new BoletoIndividualRule());
+        
         parent::__construct();
+
     }
 
-//    /**
-//     * @throws ExcecaoApi
-//     * @throws Exception
-//     */
-//    private function validar(): void
-//    {
-//        try {
-//            $translator = new ArrayLoader();
-//            $validator = new Factory(new Translator($translator, 'pt_BR'));
-//
-//            $validator = $validator->make(
-//                $this->jsonSerialize(),
-//                BoletoIndividualRule::rules(),
-//                BoletoIndividualRule::messages());
-//
-//            if ($validator->fails()) {
-//                throw new InvalidArgumentException('Falha na validacao de campos ' . '`' .
-//                    __CLASS__ . '`: ' . json_encode($validator->errors()->all()));
-//            }
-//
-//        } catch (InvalidArgumentException $e) {
-//            throw new ExcecaoApi($e->getMessage(), $e->getCode(), $e);
-//
-//        } catch (Exception $e) {
-//            throw new Exception($e);
-//        }
-//    }
-//
-//    public function jsonSerialize(): array
-//    {
-//        return get_object_vars($this);
-//    }
-//
-//    public function getArrayForApi(): array
-//    {
-//        $chavesCustomizadas = [
-//            'nossoNumero' => 'numero_nosso_numero',
-//            'dataVencimento' => 'data_vencimento',
-//            'valorTitulo' => 'valor_titulo',
-//            'dataLimitePagamento' => 'data_limite_pagamento',
-//            'seuNumero' => 'texto_seu_numero',
-//            'usoBeneficiario' => 'texto_uso_beneficiario',
-//        ];
-//
-//        return Helper::getArrayModificadoByChavesCustomizadas($this->jsonSerialize(), $chavesCustomizadas);
-//    }
+    public function getChavesCustomizadas(): array
+    {
+        return [
+            'nossoNumero' => 'numero_nosso_numero',
+            'dataVencimento' => 'data_vencimento',
+            'valorTitulo' => 'valor_titulo',
+            'dataLimitePagamento' => 'data_limite_pagamento',
+            'seuNumero' => 'texto_seu_numero',
+            'usoBeneficiario' => 'texto_uso_beneficiario'
+        ];
+    }
 }

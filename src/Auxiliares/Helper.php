@@ -130,4 +130,14 @@ class Helper
         return $array;
     }
 
+    public static function validateArrayElementsType(array $objetos, mixed $class): bool
+    {
+        foreach ($objetos as $objeto) {
+            if (!($objeto instanceof $class)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

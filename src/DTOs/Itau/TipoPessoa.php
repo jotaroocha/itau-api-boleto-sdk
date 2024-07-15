@@ -5,6 +5,8 @@ namespace Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau;
 use Jotaroocha\ItauApiBolecodeSdk\Enums\Itau\TipoPessoaEnum;
 use Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau\TipoPessoaRule;
 
+/* 'tipo_pessoa' */
+
 class TipoPessoa extends ItauAbstractDTO
 {
     protected string $tipoPessoa; // codigo_tipo_pessoa
@@ -17,11 +19,7 @@ class TipoPessoa extends ItauAbstractDTO
         $this->cpf = $cpf ? trim($cpf) : null;
         $this->cnpj = $cnpj ? trim($cnpj) : null;
 
-        $this->setRegrasDeValidacao(TipoPessoaRule::rulesByParameters([
-            'codigo_tipo_pessoa' => $this->tipoPessoa
-        ]));
-
-        $this->setMensagensDeValidacaoCustomizadas(TipoPessoaRule::messages());
+        $this->setRule(new TipoPessoaRule($this->tipoPessoa));
 
         parent::__construct();
     }
