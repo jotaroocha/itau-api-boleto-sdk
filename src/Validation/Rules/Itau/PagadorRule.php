@@ -2,6 +2,8 @@
 
 namespace Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau;
 
+use Jotaroocha\ItauApiBolecodeSdk\Contratos\ItauInterfaceRule;
+
 class PagadorRule implements ItauInterfaceRule
 {
     public function rules(): array

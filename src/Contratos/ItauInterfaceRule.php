@@ -1,6 +1,6 @@
 <?php
 
-namespace Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau;
+namespace Jotaroocha\ItauApiBolecodeSdk\Contratos;
 
 interface ItauInterfaceRule
 {

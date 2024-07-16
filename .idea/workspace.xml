@@ -5,22 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b89e726-049b-4b64-9fed-fa0738c2ac67" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Enums/Itau/BoleCodeInstrumentoCobrancaEnum.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Validation/Rules/Itau/AvalistaRule.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Validation/Rules/Itau/BoletoRule.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Validation/Rules/Itau/PagadorRule.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Auxiliares/Helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Auxiliares/Helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTOs/Itau/Avalista.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Itau/Avalista.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTOs/Itau/Boleto.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Itau/Boleto.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DTOs/Itau/BoletoIndividual.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Itau/BoletoIndividual.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTOs/Itau/Endereco.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Itau/Endereco.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTOs/Itau/ItauAbstractDTO.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Itau/ItauAbstractDTO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTOs/Itau/Pagador.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Itau/Pagador.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTOs/Itau/Pessoa.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Itau/Pessoa.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTOs/Itau/TipoPessoa.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Itau/TipoPessoa.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Testes/teste.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Testes/teste.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Validation/Rules/Itau/BoletoIndividualRule.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Validation/Rules/Itau/BoletoIndividualRule.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,6 +130,8 @@
       <workItem from="1720793204037" duration="88000" />
       <workItem from="1720793302720" duration="19387000" />
       <workItem from="1721045040348" duration="17473000" />
+      <workItem from="1721070670901" duration="5234000" />
+      <workItem from="1721133751421" duration="4301000" />
     </task>
     <servers />
   </component>

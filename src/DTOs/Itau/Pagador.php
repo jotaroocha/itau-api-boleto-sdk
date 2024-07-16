@@ -2,6 +2,7 @@
 
 namespace Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau;
 
+use Jotaroocha\ItauApiBolecodeSdk\Contratos\ItauAbstractDTO;
 use Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau\PagadorRule;
 
 class Pagador extends ItauAbstractDTO

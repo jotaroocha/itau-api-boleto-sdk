@@ -3,6 +3,7 @@
 namespace Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau;
 
 use DateTime;
+use Jotaroocha\ItauApiBolecodeSdk\Contratos\ItauAbstractDTO;
 use Jotaroocha\ItauApiBolecodeSdk\Excecoes\ExcecaoApi;
 use Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau\BoletoIndividualRule;
 
@@ -39,7 +40,7 @@ class BoletoIndividual extends ItauAbstractDTO
         $this->usoBeneficiario = $usoBeneficiario ? trim($usoBeneficiario) : null;
 
         $this->setRule(new BoletoIndividualRule());
-        
+
         parent::__construct();
 
     }

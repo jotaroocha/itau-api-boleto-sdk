@@ -2,8 +2,8 @@
 
 namespace Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau;
 
+use Jotaroocha\ItauApiBolecodeSdk\Contratos\ItauAbstractDTO;
 use Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau\AvalistaRule;
-use Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau\PagadorRule;
 
 /* 'sacador_avalista' */
 
@@ -16,7 +16,6 @@ class Avalista extends ItauAbstractDTO
     {
         $this->pessoa = $pessoa;
         $this->endereco = $endereco;
-
         $this->setRule(new AvalistaRule());
 
         parent::__construct();

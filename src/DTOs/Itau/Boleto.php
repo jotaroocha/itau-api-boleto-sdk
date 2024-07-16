@@ -4,8 +4,8 @@ namespace Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau;
 
 use DateTime;
 use InvalidArgumentException;
+use Jotaroocha\ItauApiBolecodeSdk\Contratos\ItauAbstractDTO;
 use Jotaroocha\ItauApiBolecodeSdk\Enums\Itau\BoletoEspecieTituloEnum;
-use Jotaroocha\ItauApiBolecodeSdk\Enums\Itau\BoleCodeEtapaProcessoEnum;
 use Jotaroocha\ItauApiBolecodeSdk\Enums\Itau\BoletoFormaEnvioEnum;
 use Jotaroocha\ItauApiBolecodeSdk\Enums\Itau\BoletoInstrumentoCobrancaEnum;
 use Jotaroocha\ItauApiBolecodeSdk\Enums\Itau\BoletoTipoBoletoEnum;

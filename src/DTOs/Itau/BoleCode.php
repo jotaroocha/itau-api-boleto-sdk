@@ -2,6 +2,7 @@
 
 namespace Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau;
 
+use Jotaroocha\ItauApiBolecodeSdk\Contratos\ItauAbstractDTO;
 use Jotaroocha\ItauApiBolecodeSdk\Enums\Itau\BoleCodeEtapaProcessoEnum;
 use Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau\BoleCodeRule;
 
@@ -40,4 +41,6 @@ class BoleCode extends ItauAbstractDTO
             'pix' => 'dados_qrcode',
         ];
     }
+
+
 }

@@ -4,6 +4,7 @@ namespace Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau;
 
 use Exception;
 use Illuminate\Validation\Rule;
+use Jotaroocha\ItauApiBolecodeSdk\Contratos\ItauInterfaceRule;
 use Jotaroocha\ItauApiBolecodeSdk\Enums\Itau\BoletoEspecieTituloEnum;
 use Jotaroocha\ItauApiBolecodeSdk\Enums\Itau\BoletoFormaEnvioEnum;
 use Jotaroocha\ItauApiBolecodeSdk\Enums\Itau\BoletoInstrumentoCobrancaEnum;

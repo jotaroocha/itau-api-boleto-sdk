@@ -2,6 +2,8 @@
 
 namespace Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau;
 
+use Jotaroocha\ItauApiBolecodeSdk\Contratos\ItauInterfaceRule;
+
 class BoletoIndividualRule implements ItauInterfaceRule
 {
 

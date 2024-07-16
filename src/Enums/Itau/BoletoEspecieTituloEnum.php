@@ -57,7 +57,7 @@ enum BoletoEspecieTituloEnum: string
             self::CD => 'Confissao de Divida',
             self::CH => 'Cheque',
             self::CM => 'Contrato de Mutuo',
-            self::CPS => 'Conta de Prestacao de Servicos',
+            self::CPS => 'Conta de Prestacao de Services',
             self::DMI => 'Duplicata de Venda Mercantil por Indicacao',
             self::DSI => 'Duplicata de Prestação de Serviços - Original Por Indicacao',
             self::RA => 'Recibo de Aluguel (PJ)',

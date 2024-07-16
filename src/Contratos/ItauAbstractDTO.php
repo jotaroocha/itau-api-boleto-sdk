@@ -1,6 +1,6 @@
 <?php
 
-namespace Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau;
+namespace Jotaroocha\ItauApiBolecodeSdk\Contratos;
 
 use Exception;
 use Illuminate\Translation\ArrayLoader;
@@ -9,7 +9,6 @@ use Illuminate\Validation\Factory;
 use InvalidArgumentException;
 use Jotaroocha\ItauApiBolecodeSdk\Auxiliares\Helper;
 use Jotaroocha\ItauApiBolecodeSdk\Excecoes\ExcecaoApi;
-use Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau\ItauInterfaceRule;
 use JsonSerializable;
 
 abstract class

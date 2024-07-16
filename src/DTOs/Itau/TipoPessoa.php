@@ -2,6 +2,7 @@
 
 namespace Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau;
 
+use Jotaroocha\ItauApiBolecodeSdk\Contratos\ItauAbstractDTO;
 use Jotaroocha\ItauApiBolecodeSdk\Enums\Itau\TipoPessoaEnum;
 use Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau\TipoPessoaRule;
 

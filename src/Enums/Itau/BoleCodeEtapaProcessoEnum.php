@@ -9,6 +9,6 @@ enum BoleCodeEtapaProcessoEnum: string
 
     use EnumHelperTrait;
 
-    case Validacao = 'validacao';
+    case Simulacao = 'simulacao';
     case Efetivacao = 'efetivacao';
 }

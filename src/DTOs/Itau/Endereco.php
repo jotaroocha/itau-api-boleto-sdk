@@ -2,6 +2,7 @@
 
 namespace Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau;
 
+use Jotaroocha\ItauApiBolecodeSdk\Contratos\ItauAbstractDTO;
 use Jotaroocha\ItauApiBolecodeSdk\Enums\Itau\EstadoSiglaEnum;
 use Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau\EnderecoRule;
 
@@ -29,7 +30,7 @@ class Endereco extends ItauAbstractDTO
         $this->cep = trim($cep);
 
         $this->setRule(new EnderecoRule());
-        
+
         parent::__construct();
     }
 

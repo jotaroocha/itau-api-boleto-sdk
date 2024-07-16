@@ -3,9 +3,8 @@
 
 namespace Jotaroocha\ItauApiBolecodeSdk\DTOs\Itau;
 
-use Exception;
+use Jotaroocha\ItauApiBolecodeSdk\Contratos\ItauAbstractDTO;
 use Jotaroocha\ItauApiBolecodeSdk\Enums\Itau\PixTipoCobrancaEnum;
-use Jotaroocha\ItauApiBolecodeSdk\Excecoes\ExcecaoApi;
 use Jotaroocha\ItauApiBolecodeSdk\Validation\Rules\Itau\PixRule;
 
 class Pix extends ItauAbstractDTO
